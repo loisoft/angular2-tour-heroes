@@ -4,7 +4,11 @@ import { HEROES } from './mock-heroes';
 @Injectable()
 export class HeroService {
     getHeroes() {
-        return new Promise<Hero[]>(resolve =>
-        setTimeout(() => resolve(HEROES), 5000));
+        return Promise.resolve(HEROES);
+    }
+
+    getHero(id: number) {
+        return this.getHeroes()
+        .then(heroes => heroes.filter(hero => hero.id == id)[0]);
     }
 }
